@@ -23,7 +23,7 @@ impl State {
         let mut rng = RandomNumberGenerator::new();
         let map_builder = MapBuilder::new(&mut rng);
         Self {
-            map: Map::new(),
+            map: map_builder.map,
             player: Player::new(map_builder.player_start),
         }
     }
