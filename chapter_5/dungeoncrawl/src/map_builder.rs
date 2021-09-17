@@ -20,9 +20,11 @@ impl MapBuilder {
         mb.player_start = mb.rooms[0].center();
         mb
     }
+
     fn fill(&mut self, tile: TileType) {
         self.map.tiles.iter_mut().for_each(|t| *t = tile);
     }
+
     fn build_random_rooms(&mut self, rng: &mut RandomNumberGenerator) {
         while self.rooms.len() < NUM_ROOMS {
             let room = Rect::with_size(
@@ -78,7 +80,7 @@ impl MapBuilder {
 
             if rng.range(0, 2) == 1 {
                 self.apply_horizontal_tunnel(prev.x, new.x, prev.y);
-                self.apply_vertical_tunnel(prev.y, new.y, prev.x);
+                self.apply_vertical_tunnel(prev.y, new.y, new.x);
             } else {
                 self.apply_vertical_tunnel(prev.y, new.y, prev.x);
                 self.apply_horizontal_tunnel(prev.x, new.x, new.y);

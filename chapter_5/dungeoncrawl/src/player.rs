@@ -8,6 +8,7 @@ impl Player {
     pub fn new(position: Point) -> Self {
         Self { position }
     }
+
     pub fn render(&self, ctx: &mut BTerm, camera: &Camera) {
         ctx.set_active_console(1);
         ctx.set(
@@ -18,6 +19,7 @@ impl Player {
             to_cp437('@'),
         );
     }
+
     pub fn update(&mut self, ctx: &mut BTerm, map: &Map, camera: &mut Camera) {
         if let Some(key) = ctx.key {
             let delta = match key {
@@ -27,7 +29,6 @@ impl Player {
                 VirtualKeyCode::Down => Point::new(0, 1),
                 _ => Point::zero(),
             };
-
             let new_position = self.position + delta;
             if map.can_enter_tile(new_position) {
                 self.position = new_position;

@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 mod camera;
 mod map;
 mod map_builder;
@@ -42,14 +44,14 @@ impl GameState for State {
         ctx.set_active_console(1);
         ctx.cls();
         self.player.update(ctx, &self.map, &mut self.camera);
-        self.map.render(ctx, &mut self.camera);
-        self.player.render(ctx, &mut self.camera);
+        self.map.render(ctx, &self.camera);
+        self.player.render(ctx, &self.camera);
     }
 }
 
 fn main() -> BError {
     let context = BTermBuilder::new()
-        .with_title("Rusty Roguelike")
+        .with_title("Dungeon Crawler")
         .with_fps_cap(30.0)
         .with_dimensions(DISPLAY_WIDTH, DISPLAY_HEIGHT)
         .with_tile_dimensions(32, 32)
